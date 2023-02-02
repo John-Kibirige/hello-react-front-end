@@ -1,7 +1,7 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
 
-const ENDPOINT = "http://localhost:3000/api/endpoints/greeting"
+const ENDPOINT = 'http://localhost:3000/api/endpoints/greeting';
 
 const initialState = {
   greeting: {},
@@ -18,23 +18,23 @@ export const fetchGreeting = createAsyncThunk('hello-rails-greeting', async () =
 });
 
 const greetingSlice = createSlice({
-    name: 'greeting',
-    initialState,
-    extraReducers(builder) {
-        builder
-        .addCase(fetchGreeting.pending, (state) => {
-            const st = state;
-            st.status = 'loading'
-        })
-        .addCase(fetchGreeting.fulfilled, (state, action) => {
-            const st = state
-            st.status = 'succeeded';
-            st.greeting = action.payload
-        })
-        .addCase(fetchGreeting.rejected, (state, action) => {
-            throw new Error(action.error)
-        })
-    }
-})
+  name: 'greeting',
+  initialState,
+  extraReducers(builder) {
+    builder
+      .addCase(fetchGreeting.pending, (state) => {
+        const st = state;
+        st.status = 'loading';
+      })
+      .addCase(fetchGreeting.fulfilled, (state, action) => {
+        const st = state;
+        st.status = 'succeeded';
+        st.greeting = action.payload;
+      })
+      .addCase(fetchGreeting.rejected, (state, action) => {
+        throw new Error(action.error);
+      });
+  },
+});
 
 export default greetingSlice;
